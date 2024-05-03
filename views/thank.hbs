@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Your Purchase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .thank-you-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .confirmation-number {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .continue-shopping {
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .d1{
+            display: flex;
+            
+        }
+        .d1 img{
+                height: 163px;
+                width: 147px;
+                border-radius: 2px;
+                margin: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <h1>Thank You for Your Purchase!</h1>
+        <p>Your order has been successfully placed.</p>
+        <h2>You also like this</h2>
+        <div class="d1">
+            <img src="images/mobile1.webp" alt="hello">
+            <img src="images/laptop1.webp" alt="hello">
+            <img src="images/mobile2.webp" alt="hello">
+
+        </div>
+        <a href="/product" class="continue-shopping">Continue Shopping</a>
+        <a href="/index" class="continue-shopping">Back</a>
+    </div>
+</body>
+</html>
