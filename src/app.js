@@ -42,7 +42,7 @@ app.set("view engine","hbs");
 
 //routing .................................................................................
 
-app.get("https://anuragecommerce23.netlify.app/",(req,res)=>{
+app.get("https://anuragecommerce23.netlify.app",(req,res)=>{
    res.render("login");
 })
 app.get("https://anuragecommerce23.netlify.app/register",(req,res)=>{
