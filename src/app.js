@@ -42,23 +42,23 @@ app.set("view engine","hbs");
 
 //routing .................................................................................
 
-app.get("/",(req,res)=>{
+app.get("https://anuragecommerce23.netlify.app/",(req,res)=>{
    res.render("login");
 })
-app.get("/register",(req,res)=>{
+app.get("https://anuragecommerce23.netlify.app/register",(req,res)=>{
    res.render("register");
 })
-app.get("/index",(req,res)=>{
+app.get("https://anuragecommerce23.netlify.app/index",(req,res)=>{
    res.render("index");
 })
-app.get("/product",(req,res)=>{
+app.get("https://anuragecommerce23.netlify.app/product",(req,res)=>{
    res.render("product");
 })
 
-app.get("/contact",(req,res)=>{
+app.get("https://anuragecommerce23.netlify.app/contact",(req,res)=>{
    res.render("contact");
 })
-app.get("/about",(req,res)=>{
+app.get("https://anuragecommerce23.netlify.app/about",(req,res)=>{
    res.render("about");
 })
 
@@ -69,7 +69,7 @@ app.get("/about",(req,res)=>{
 
 
 
-app.post("/register",async(req,res)=>{
+app.post("https://anuragecommerce23.netlify.app/register",async(req,res)=>{
    try{
      const reg=new register({
         username:req.body.username,
@@ -87,7 +87,7 @@ app.post("/register",async(req,res)=>{
    }
 })
 
-app.post("/login",async(req,res)=>{
+app.post("https://anuragecommerce23.netlify.app/login",async(req,res)=>{
    try{
        const unam=req.body.username;
        const pass=req.body.password;
@@ -106,7 +106,7 @@ app.post("/login",async(req,res)=>{
 })
 
 
-app.post("/purchase",async(req,res)=>{
+app.post("https://anuragecommerce23.netlify.app/purchase",async(req,res)=>{
    try{
      const reg=new product({
         firstname:req.body.firstname,
@@ -124,7 +124,7 @@ app.post("/purchase",async(req,res)=>{
       res.status(500).send(error)
    }
 })
-app.post("/contact",async(req,res)=>{
+app.post("https://anuragecommerce23.netlify.app/contact",async(req,res)=>{
    try{
      const reg=new contact({
         name:req.body.name,
