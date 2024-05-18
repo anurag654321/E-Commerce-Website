@@ -1,8 +1,8 @@
 const mongoose=require("mongoose");
-
+require('dotenv').config();
 
 //creatin a database
-mongoose.connect("mongodb+srv://2k22it32861:uBfA1sRQM55z9253@cluster0.pflbfwf.mongodb.net/2k22it32861?retryWrites=true&w=majority&appName=Cluster0",{
+mongoose.connect(process.env.DB,{
     //useCreateIndex:true,
     useNewUrlParser:true,
     useUnifiedTopology:true

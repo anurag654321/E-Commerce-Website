@@ -7,15 +7,15 @@ const register =require("./models/register");
 const product =require("./models/purchase");
 const contact =require("./models/contact");
 
+require('dotenv').config();
 
-const DB='mongodb+srv://2k22it32861:uBfA1sRQM55z9253@cluster0.pflbfwf.mongodb.net/2k22it32861?retryWrites=true&w=majority&appName=Cluster0'
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 
 
-mongoose.connect(DB,{
+mongoose.connect(process.env.DB,{
    useNewUrlParser:true,
    useCreateIndex:true,
    useUnifiedTopology:true,
