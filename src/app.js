@@ -4,8 +4,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 
+// DB connection
 require("./db/conn");
 
+// Models
 const register = require("./models/register");
 const product = require("./models/purchase");
 const contact = require("./models/contact");
@@ -59,15 +61,12 @@ app.post("/register", async (req, res) => {
       });
 
       await reg.save();
-
-      // ✅ Redirects to login page after registration
       res.redirect("/");
    } catch (error) {
-      console.log(error);
-      res.status(500).send("Registration failed");
+      console.error("Registration Error:", error);
+      res.status(500).send("❌ Registration failed");
    }
 });
-
 
 // Login route
 app.post("/login", async (req, res) => {
@@ -76,12 +75,13 @@ app.post("/login", async (req, res) => {
       const pass = req.body.password;
       const user = await register.findOne({ username: unam });
 
-      if (user.password == pass) {
-         res.status(201).render("index");
+      if (user && user.password === pass) {
+         res.status(200).render("index");
       } else {
-         res.render("register");
+         res.status(401).render("register"); // invalid login
       }
    } catch (error) {
+      console.error("Login Error:", error);
       res.status(500).render("register");
    }
 });
@@ -89,7 +89,7 @@ app.post("/login", async (req, res) => {
 // Purchase route
 app.post("/purchase", async (req, res) => {
    try {
-      const reg = new product({
+      const newPurchase = new product({
          firstname: req.body.firstname,
          lastname: req.body.lastname,
          email: req.body.email,
@@ -97,17 +97,18 @@ app.post("/purchase", async (req, res) => {
          address: req.body.address,
       });
 
-      const ctct = await reg.save();
+      await newPurchase.save();
       res.status(201).render("thank");
    } catch (error) {
-      res.status(500).send(error);
+      console.error("Purchase Error:", error);
+      res.status(500).send("❌ Purchase failed");
    }
 });
 
 // Contact route
 app.post("/contact", async (req, res) => {
    try {
-      const reg = new contact({
+      const newContact = new contact({
          name: req.body.name,
          email: req.body.email,
          mobile: req.body.mobile,
@@ -115,14 +116,15 @@ app.post("/contact", async (req, res) => {
          message: req.body.message,
       });
 
-      const ctct = await reg.save();
+      await newContact.save();
       res.status(201).render("index");
    } catch (error) {
-      res.status(500).send(error);
+      console.error("Contact Error:", error);
+      res.status(500).send("❌ Contact submission failed");
    }
 });
 
 // Start server
 app.listen(port, () => {
-   console.log(`server is running at port ${port}`);
+   console.log(`✅ Server is running at port ${port}`);
 });
