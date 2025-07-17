@@ -4,10 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 
-// DB connection
 require("./db/conn");
 
-// Models
 const register = require("./models/register");
 const product = require("./models/purchase");
 const contact = require("./models/contact");
@@ -15,17 +13,17 @@ const contact = require("./models/contact");
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Paths
-const staticpath = path.join(__dirname, "../public");
-const viewsPath = path.join(__dirname, "../views");
+// ✅ Paths (corrected)
+const staticPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "views");
 
-// Middleware
-app.use(express.static(staticpath));
+// ✅ Middleware
+app.use(express.static(staticPath));
 app.use(express.urlencoded({ extended: false }));
 app.set("views", viewsPath);
 app.set("view engine", "hbs");
 
-// Routes
+// ✅ Routes
 app.get("/", (req, res) => {
    res.render("login");
 });
@@ -50,7 +48,7 @@ app.get("/about", (req, res) => {
    res.render("about");
 });
 
-// Register route
+// ✅ Register route
 app.post("/register", async (req, res) => {
    try {
       const reg = new register({
@@ -63,33 +61,33 @@ app.post("/register", async (req, res) => {
       await reg.save();
       res.redirect("/");
    } catch (error) {
-      console.error("Registration Error:", error);
-      res.status(500).send("❌ Registration failed");
+      console.log("Register Error:", error);
+      res.status(500).send("Registration failed");
    }
 });
 
-// Login route
+// ✅ Login route
 app.post("/login", async (req, res) => {
    try {
       const unam = req.body.username;
       const pass = req.body.password;
       const user = await register.findOne({ username: unam });
 
-      if (user && user.password === pass) {
-         res.status(200).render("index");
+      if (user && user.password == pass) {
+         res.status(201).render("index");
       } else {
-         res.status(401).render("register"); // invalid login
+         res.status(401).render("register");
       }
    } catch (error) {
-      console.error("Login Error:", error);
+      console.log("Login Error:", error);
       res.status(500).render("register");
    }
 });
 
-// Purchase route
+// ✅ Purchase route
 app.post("/purchase", async (req, res) => {
    try {
-      const newPurchase = new product({
+      const reg = new product({
          firstname: req.body.firstname,
          lastname: req.body.lastname,
          email: req.body.email,
@@ -97,18 +95,18 @@ app.post("/purchase", async (req, res) => {
          address: req.body.address,
       });
 
-      await newPurchase.save();
+      await reg.save();
       res.status(201).render("thank");
    } catch (error) {
-      console.error("Purchase Error:", error);
-      res.status(500).send("❌ Purchase failed");
+      console.log("Purchase Error:", error);
+      res.status(500).send("Purchase failed");
    }
 });
 
-// Contact route
+// ✅ Contact route
 app.post("/contact", async (req, res) => {
    try {
-      const newContact = new contact({
+      const reg = new contact({
          name: req.body.name,
          email: req.body.email,
          mobile: req.body.mobile,
@@ -116,15 +114,15 @@ app.post("/contact", async (req, res) => {
          message: req.body.message,
       });
 
-      await newContact.save();
+      await reg.save();
       res.status(201).render("index");
    } catch (error) {
-      console.error("Contact Error:", error);
-      res.status(500).send("❌ Contact submission failed");
+      console.log("Contact Error:", error);
+      res.status(500).send("Contact form failed");
    }
 });
 
-// Start server
+// ✅ Start server
 app.listen(port, () => {
-   console.log(`✅ Server is running at port ${port}`);
+   console.log(`Server is running at port ${port}`);
 });
